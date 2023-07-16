@@ -16,16 +16,27 @@ def import_data(file_path):
         reader = csv.DictReader(file, delimiter='\t')
         headers = reader.fieldnames
 
-        with driver.session() as session:
+        with driver.session(database="neo4j") as session:
+            transaction = session.begin_transaction()
+            counter = 0
+
             for row in reader:
+                counter = counter + 1
+
+                if counter == 101:      # quando sei alla 101-esima riga committa. Poi crea nuova transaction e resetta counter.
+                    transaction.commit()
+                    print("Commit")
+                    transaction = session.begin_transaction()
+                    counter = 0
+                
                 cleaned_row = {k: v.replace('"', "'").replace('\\N', '') for k, v in row.items()}
                 properties = ', '.join([f"{header}: ${header}" for header in headers])
                 query = f"CREATE (:{node_label} {{{properties}}})"
-                session.run(query, **cleaned_row)
+                transaction.run(query, **cleaned_row)
 
     driver.close()
 
-file_path = 'data/Professional.tsv'
+file_path = 'data100K/Professional.tsv'
 
 start_time = time.time()
 
