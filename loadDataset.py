@@ -5,7 +5,7 @@ from neo4j import GraphDatabase
 # Configurazione del driver di Neo4j
 uri = "bolt://localhost:7687"  # L'URI non corrisponde a quello su cui usiamo neo4j browser, di default è questo
 username = "neo4j"
-password = "bigdataneo4j"
+password = "password" # Da modificare con la propria password
 
 # Funzione per l'importazione dei dati
 def import_data(file_path):
