@@ -28,7 +28,7 @@ def import_data(folder_path):
                     for row in reader:
                         counter = counter + 1
 
-                        if counter == 101:
+                        if counter == 1001:
                             transaction.commit()
                             print(f"Commit")
                             transaction = session.begin_transaction()
