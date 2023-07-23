@@ -1,3 +1,6 @@
+// The most simple pipeline, just returns in a JSON all the Titles in the neo4j DB
+// To execute this pipeline, run the "launch_pipeline1.sh" script
+
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.functions._
@@ -14,6 +17,6 @@ val df = (spark.read.format("org.neo4j.spark.DataSource")
 df.show()
 
 // Save the DataFrame to JSON format
-val outputPath = "output.json"
+val outputPath = "all_titles_output_dir"
 df.write.mode(SaveMode.Overwrite) // Change SaveMode as per your requirement
   .json(outputPath)

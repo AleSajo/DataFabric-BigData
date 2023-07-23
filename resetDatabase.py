@@ -4,9 +4,9 @@ from neo4j import GraphDatabase
 # Configurazione del driver di Neo4j
 uri = "bolt://localhost:7687"
 username = "neo4j" 
-password = "password" # Da modificare con la propria password
+password = "bigdataneo4j" # Da modificare con la propria password
 
-# Funzione per creare gli indici
+# Elimino gli indici
 def drop_indexes():
     driver = GraphDatabase.driver(uri, auth=(username, password))
 
@@ -23,13 +23,15 @@ def drop_indexes():
     except:
         print("professional_nconst_index does not exists")
 
+# Elimino i nodi
+# Bisogna eliminare iterativamente gruppi di nodi perché altrimenti non ce la fa con la memoria
 def delete_all_nodes():
     print("Deleting all nodes")
     i=0
-    while i < 20:
+    while i < 100:
         driver = GraphDatabase.driver(uri, auth=(username, password))
         with driver.session() as session:
-            session.run("MATCH (n) WITH n LIMIT 100000 DETACH DELETE n RETURN count(*);")
+            session.run("MATCH (n) WITH n LIMIT 10000 DETACH DELETE n RETURN count(*);")
         driver.close()
         i=i+1
 

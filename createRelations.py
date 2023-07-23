@@ -4,7 +4,7 @@ from neo4j import GraphDatabase
 # Configurazione del driver di Neo4j
 uri = "bolt://localhost:7687"
 username = "neo4j" 
-password = "password" # Da modificare con la propria password
+password = "bigdataneo4j" # Da modificare con la propria password
 
 # Funzione per creare le relazioni
 def create_relationships():
@@ -12,9 +12,9 @@ def create_relationships():
 
     with driver.session() as session:
         session.run("""
-            MATCH (p: Professional), (t:Title)
+            MATCH (p:Professional), (t:Title)
             WHERE t.tconst IN split(p.knownForTitles,",")
-            MERGE (p)-[:HAS_ACTED_IN]->(t)
+            MERGE (p)-[:HAS_WORKED_IN]->(t)
         """)
         session.run("""
             MATCH (c:Crew), (t:Title)
@@ -46,6 +46,17 @@ def create_relationships():
             WHERE t.tconst = r.tconst
             MERGE (t)-[:AVERAGE_RATING]->(r)
         """)
+        session.run("""
+            MATCH (p:Professional), (c:Crew)
+            WHERE p.nconst IN split(c.directors,",")
+            MERGE (p)-[:IS_DIRECTOR_IN_CREW]->(c)
+        """)
+        session.run("""
+            MATCH (p:Professional), (c:Crew)
+            WHERE p.nconst IN split(c.writers,",")
+            MERGE (p)-[:IS_WRITER_IN_CREW]->(c)
+        """)
+        
 
     driver.close()
 
