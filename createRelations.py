@@ -4,7 +4,8 @@ from neo4j import GraphDatabase
 # Configurazione del driver di Neo4j
 uri = "bolt://localhost:7687"
 username = "neo4j" 
-password = "neo4jjjj" # Da modificare con la propria password
+password = "bigdataneo4j" # Da modificare con la propria password
+#password = "neo4jjjj"
 
 # Funzione per creare le relazioni
 def create_relationships():
