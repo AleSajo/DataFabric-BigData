@@ -7,6 +7,7 @@ from neo4j import GraphDatabase
 uri = "bolt://localhost:7687"
 username = "neo4j" 
 password = "bigdataneo4j" # Da modificare con la propria password
+#password = "neo4jjjj"
 
 # Funzione per l'importazione dei dati
 def import_data(folder_path):
