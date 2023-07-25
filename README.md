@@ -16,10 +16,12 @@ Dopo aver effettuato delle trasformazioni e pulizia su questi dataset, vengono c
 
 2. Aprire l'interfaccia di Neo4j ed effettuare il login\
     `brew services start neo4j`
+    oppure
+    `neo4j start`
    
 4. Eseguire gli script python nell'ordine:\
     `(a) resetDatabase.py`\
-    `(b) loadDatasetFromFolder.py`\
+    `(b) loadDatasetsFromFolder.py`\
     `(c) createIndexes.py`\
     `(d) createRelations.py`
 5. Utilizzare le query Cypher per interagire con i dati all'interno di Neo4j.
@@ -32,3 +34,5 @@ Dopo aver effettuato delle trasformazioni e pulizia su questi dataset, vengono c
    
 9. Per chiudere la connessione a Neo4j, digitare\
     `brew services stop neo4j`
+    oppure
+    `neo4j stop`
