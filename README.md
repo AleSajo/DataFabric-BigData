@@ -16,16 +16,19 @@ Dopo aver effettuato delle trasformazioni e pulizia su questi dataset, vengono c
 
 2. Aprire l'interfaccia di Neo4j ed effettuare il login\
     `brew services start neo4j`
-    (OPZIONALE) eliminare i nodi precaricati in neo4j tramite query cypher
-    `MATCH (n:nodeName) DETACH DELETE n`
-3. Eseguire gli script python nell'ordine:\
-    `(a) loadDatasetFromFolder.py`\
-    `(b) createIndexes.py`\
-    `(c) createRelations.py`
-4. Utilizzare le query Cypher per interagire con i dati all'interno di Neo4j.
+   
+4. Eseguire gli script python nell'ordine:\
+    `(a) resetDatabase.py`\
+    `(b) loadDatasetFromFolder.py`\
+    `(c) createIndexes.py`\
+    `(d) createRelations.py`
+5. Utilizzare le query Cypher per interagire con i dati all'interno di Neo4j.
 
     Per visualizzare il metagraph eseguire questi passaggi
-5. Spostare il file `apoc-5.9.0-core.jar` da `$NEO4J_HOME/labs` a `$NEO4J_HOME/plugins`
-6. Eseguire il comando: `CALL apoc.meta.graph`
-7. Per chiudere la connessione a Neo4j, digitare\
+6. Spostare il file `apoc-5.9.0-core.jar` da `$NEO4J_HOME/labs` a `$NEO4J_HOME/plugins`
+7. Eseguire il comando: `CALL apoc.meta.graph`
+
+8. Per eseguire le pipeline: `sh launch_pipeline#.sh`
+   
+9. Per chiudere la connessione a Neo4j, digitare\
     `brew services stop neo4j`
